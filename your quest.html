@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Quest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            background-color: #96c;
+            margin: 0;
+            padding: 0;
+        }
+        h1, p, span {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <p>Enter your quest below here to tell people what do you want them to do</p>
+    <p><input type="text" id="questInput" placeholder="Enter your quest here" onkeypress="handleKeyPress(event)"></p>
+    <p id="displayQuest"></p>
+
+    <script>
+        window.onload = function() {
+            var savedQuest = localStorage.getItem('quest');
+            if (savedQuest) {
+                document.getElementById('questInput').value = savedQuest;
+                document.getElementById('displayQuest').innerHTML = "Your quest: " + savedQuest;
+            }
+        };
+        
+        function showQuest() {
+            var quest = document.getElementById("questInput").value;
+            document.getElementById("displayQuest").innerHTML = "Your quest: " + quest;
+            localStorage.setItem('quest', quest); // บันทึกค่าลงใน Local Storage
+        }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                showQuest();
+            }
+        }
+    </script>
+</body>
+</html>
